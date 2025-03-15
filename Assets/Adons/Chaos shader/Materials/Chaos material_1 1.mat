@@ -37,7 +37,7 @@ Material:
     - _posX: -10.51
     - _posY: 0.52
     - _sX: 0.921
-    - _sY: 0.668
+    - _sY: -0
     m_Colors:
     - _BrightColor: {r: 0, g: 0, b: 0, a: 0}
     - _LightColor: {r: 0, g: 0, b: 0, a: 1}

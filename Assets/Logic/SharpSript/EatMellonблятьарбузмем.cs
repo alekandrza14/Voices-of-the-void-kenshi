@@ -12,18 +12,26 @@ public class EatMellonблятьарбузмем : MonoBehaviour
         {
             if (hit2.collider != null)
             {
-                if (hit2.collider.GetComponent<EatMellonблятьарбузмем>())
+                if (hit2.collider.gameObject == gameObject)
                 {
-                    if (Input.GetKeyDown(KeyCode.Q))
+                    if (hit2.collider.GetComponent<EatMellonблятьарбузмем>())
                     {
-                        if (PolitDate.IsVersionE() == politiceconomic.left) fristPersonControler.food += 60; 
-                        if (PolitDate.IsVersionE() == politiceconomic.right) fristPersonControler.food += 10;
-                        if (PolitDate.IsVersionE() == politiceconomic.mind) fristPersonControler.food += 20;
-                        if (fristPersonControler.food > 100) fristPersonControler.food = 100;
-                        EatHelper.text.text = "";
-                        Destroy(gameObject);
+                        if (Input.GetKeyDown(KeyCode.Q))
+                        {
+                            if (PolitDate.IsVersionE() == politiceconomic.left) fristPersonControler.food += 60;
+                            if (PolitDate.IsVersionE() == politiceconomic.right) fristPersonControler.food += 10;
+                            if (PolitDate.IsVersionE() == politiceconomic.mind) fristPersonControler.food += 20; 
+                            if (PolitDate.IsVersionE() == politiceconomic.bipoly) fristPersonControler.food += 60;
+                            if (fristPersonControler.food > 100) fristPersonControler.food = 100;
+                            EatHelper.text.text = "";
+                            Destroy(gameObject);
+                        }
+                        EatHelper.text.text = "Слопать Й";
                     }
-                    EatHelper.text.text = "Слопать Й";
+                    else
+                    {
+                        if (EatHelper.text.text == "Слопать Й") EatHelper.text.text = "";
+                    }
                 }
                 else
                 {

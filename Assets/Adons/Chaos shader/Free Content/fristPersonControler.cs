@@ -18,11 +18,17 @@ public class fristPersonControler : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (PolitDate.IsGoodE(politiceconomic.left)) if (other.GetComponent<PayZone>())
-        {
-            stamina -= Time.deltaTime / 300;
-            food -= Time.deltaTime / 350;
-            other.GetComponent<PayZone>().UpdatePay();
-        }
+            {
+                stamina -= Time.deltaTime / 300;
+                food -= Time.deltaTime / 350;
+                other.GetComponent<PayZone>().UpdatePay();
+            }
+        if (PolitDate.IsGoodE(politiceconomic.bipoly)) if (other.GetComponent<PayZone>())
+            {
+                stamina -= Time.deltaTime / 280;
+                food -= Time.deltaTime / 300;
+                other.GetComponent<PayZone>().UpdatePay();
+            }
         if (other.GetComponent<HealStamina>())
         {
             stamina += Time.deltaTime / 100;
@@ -39,7 +45,7 @@ public class fristPersonControler : MonoBehaviour
 
     void Update()
     {
-        if (PolitDate.IsGoodE(politiceconomic.left)) moneydrkel.text = "ꝏ t"; else { moneydrkel.text = "0 t"; }
+        if (PolitDate.IsGoodE(politiceconomic.left)) moneydrkel.text = "ꝏ t"; else if (PolitDate.IsGoodE(politiceconomic.bipoly)) { moneydrkel.text = "умрите t"; } else { moneydrkel.text = "0 t"; }
         st.text = "выносл.:" + System.MathF.Round(stamina,1);
         fo.text = "сытось.:" + System.MathF.Round(food,1);
         food -= Time.deltaTime / 200;
@@ -105,12 +111,18 @@ public class fristPersonControler : MonoBehaviour
                 rb.AddForce(Vector3.up*(50 * Time.deltaTime), ForceMode.Impulse);
             }
         }
-        if(PolitDate.IsGoodE(politiceconomic.right))  if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            GameObject bulletobj = Instantiate(gun_bullet, gun_point.transform.position, gun_point.transform.rotation);
-            Rigidbody bulletphysic = bulletobj.GetComponent<Rigidbody>();
-            bulletphysic.AddForce(bulletobj.transform.forward * 80f, ForceMode.Impulse);
-        }
+        if (PolitDate.IsGoodE(politiceconomic.right)) if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                GameObject bulletobj = Instantiate(gun_bullet, gun_point.transform.position, gun_point.transform.rotation);
+                Rigidbody bulletphysic = bulletobj.GetComponent<Rigidbody>();
+                bulletphysic.AddForce(bulletobj.transform.forward * 80f, ForceMode.Impulse);
+            }
+        if (PolitDate.IsGoodE(politiceconomic.bipoly)) if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                GameObject bulletobj = Instantiate(gun_bullet, gun_point.transform.position, gun_point.transform.rotation);
+                Rigidbody bulletphysic = bulletobj.GetComponent<Rigidbody>();
+                bulletphysic.AddForce(bulletobj.transform.forward * 80f, ForceMode.Impulse);
+            }
         if (Input.GetKey(KeyCode.Mouse1))
         {
             g[0].transform.Rotate(0, Input.GetAxisRaw("Mouse X") * (150f * Time.fixedDeltaTime), 0);
